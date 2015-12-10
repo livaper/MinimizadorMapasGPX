@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  *
  */
 
-public class PontoMarcado implements Comparable<PontoMarcado>{
+public class PontoMarcado {
 	private Double identificador;
 	private Double longitude;
 	private Double latitude;
@@ -54,7 +55,7 @@ public class PontoMarcado implements Comparable<PontoMarcado>{
 	public void setHorario(Date horario) {
 		this.horario = horario;
 	}
-	
+
 	public Double getDistanciaARetaAdjacente() {
 		return distanciaARetaAdjacente;
 	}
@@ -63,15 +64,21 @@ public class PontoMarcado implements Comparable<PontoMarcado>{
 		this.distanciaARetaAdjacente = distanciaARetaAdjacente;
 	}
 
-	@Override
-	public int compareTo(PontoMarcado outroPonto) {
-		if (this.distanciaARetaAdjacente < outroPonto.distanciaARetaAdjacente) {
-            return -1;
-        }
-        if (this.distanciaARetaAdjacente > outroPonto.distanciaARetaAdjacente) {
-            return 1;
-        }
-        return 0;
-    }
+	public static Comparator<PontoMarcado> getComparatorDataCrescente() {
+		return new Comparator<PontoMarcado>() {
+			@Override
+			public int compare(PontoMarcado ponto1, PontoMarcado ponto2) {
+				return ponto1.getHorario().compareTo(ponto2.getHorario());
+			}
+		};
+	}
 
+	public static Comparator<PontoMarcado> getComparatorDistanciaARetaCrescente() {
+		return new Comparator<PontoMarcado>() {
+			@Override
+			public int compare(PontoMarcado ponto1, PontoMarcado ponto2) {
+				return ponto1.getDistanciaARetaAdjacente().compareTo(ponto2.getDistanciaARetaAdjacente());
+			}
+		};
+	}
 }
