@@ -34,6 +34,8 @@ public class Trajetoria {
 		}
 	}
 
+	
+
 	public List<PontoMarcado> getPontosMarcados() {
 		return pontosMarcados;
 	}
