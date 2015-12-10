@@ -32,16 +32,36 @@ public class MinimizadorMapasMain {
 
 		// LEITURA DO ARQUIVO GPX DE ENTRADA E PREENCHIMENTO DO OBJETO DA
 		// TRAJETORIA
+		LeitorGPX leitor = new LeitorGPX();
+		Trajetoria trajetoria = new Trajetoria();
+		// TODO
+
+		// ADICAO DAS DISTANCIAS DO PONTO A RETA FORMADA PELOS PONTOS ADJACENTES
+		trajetoria.adicionaDistanciaARetaAdjacenteDosPontos();
+
+		RedutorDePontos redutor = new RedutorDePontos();
 
 		// TRATA A MINIMIZACAO COM A DISTANCIA LIMITE
 		if (opcaoEscolhida == OPCAO_DISTANCIA_LIMITE) {
-			System.out.println("Digite a distância em metros:");
-			
+			System.out.println("Digite a distância limite em metros:");
+			Double distancia = scanner.nextDouble();
+			redutor.reduzTrajetoriaPorDistancia(trajetoria, distancia);
+
 		}
 		// TRATA A MINIMIZACAO COM A PORCENTAGEM
 		else if (opcaoEscolhida == OPCAO_PORCENTAGEM) {
-			System.out.println("Digite a porcentagem entre 0 e 100:");
+			System.out.println("Digite a porcentagem entre 0 e 100:\n");
+			Double porcentagem = null;
+			boolean porcentagemInvalida;
+			do {
+				porcentagem = scanner.nextDouble();
+				porcentagemInvalida = porcentagem > 100 || porcentagem < 0;
+				if (porcentagemInvalida) {
+					System.out.println("Porcentagem Invalida! Digite um numero ente 0 e 100, inclusive:");
+				}
+			} while (porcentagemInvalida);
 			
+			redutor.reduzTrajetoriaPorPorcentagem(trajetoria, porcentagem);
 		}
 
 	}
