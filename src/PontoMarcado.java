@@ -7,10 +7,11 @@ import java.util.Date;
  *
  */
 
-public class PontoMarcado {
+public class PontoMarcado implements Comparable<PontoMarcado>{
 	private Double identificador;
 	private Double longitude;
 	private Double latitude;
+	private Double distanciaARetaAdjacente;
 	private Date horario;
 
 	public PontoMarcado(Double identificador, Double longitude, Double latitude, Date horario) {
@@ -19,6 +20,7 @@ public class PontoMarcado {
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.horario = horario;
+		this.distanciaARetaAdjacente = null;
 	}
 
 	public Double getIdentificador() {
@@ -52,5 +54,24 @@ public class PontoMarcado {
 	public void setHorario(Date horario) {
 		this.horario = horario;
 	}
+	
+	public Double getDistanciaARetaAdjacente() {
+		return distanciaARetaAdjacente;
+	}
+
+	public void setDistanciaARetaAdjacente(Double distanciaARetaAdjacente) {
+		this.distanciaARetaAdjacente = distanciaARetaAdjacente;
+	}
+
+	@Override
+	public int compareTo(PontoMarcado outroPonto) {
+		if (this.distanciaARetaAdjacente < outroPonto.distanciaARetaAdjacente) {
+            return -1;
+        }
+        if (this.distanciaARetaAdjacente > outroPonto.distanciaARetaAdjacente) {
+            return 1;
+        }
+        return 0;
+    }
 
 }
