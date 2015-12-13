@@ -1,5 +1,7 @@
+
 /**
  * Classe de escrita num novo arquivo GPX
+ * 
  * @author liviapereira
  *
  */

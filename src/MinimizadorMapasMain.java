@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /**
  * Classe main que executa a minimização de mapas. A minimização consiste em
  * reduzir a quantidade de pontos presentes em uma trajetória realizada em um
@@ -23,17 +21,27 @@ public class MinimizadorMapasMain {
 
 	public static void main(String[] args) {
 
-		System.out.println("Olá! Bem vindo ao minimizador de pontos em uma trajetória. Digite o opção desejada:");
-		System.out.println("Digite 1 para minimizar através de uma distância limite: ");
-		System.out.println("Digite 2 para minimizar através de uma porcentagem: ");
+		
+		int opcaoEscolhida;
+		Double distancia = null;
+		Double porcentagem = null;
+		String nomeArquivoEntrada = args[1];
+		String nomeArquivoSaida = args[2];
 
-		Scanner scanner = new Scanner(System.in);
-		int opcaoEscolhida = scanner.nextInt();
+		if (args[0].endsWith("%")) {
+			opcaoEscolhida = OPCAO_PORCENTAGEM;
+			porcentagem = Double.valueOf(args[0].substring(0, args[0].length() - 1));
+		} else {
+			opcaoEscolhida = OPCAO_DISTANCIA_LIMITE;
+			distancia = Double.valueOf(args[0]);
+
+		}
 
 		// LEITURA DO ARQUIVO GPX DE ENTRADA E PREENCHIMENTO DO OBJETO DA
 		// TRAJETORIA
 		LeitorGPX leitor = new LeitorGPX();
-		Trajetoria trajetoria = new Trajetoria();
+		Trajetoria trajetoria = leitor.lerXML(nomeArquivoEntrada);
+		
 		// TODO
 
 		// ADICAO DAS DISTANCIAS DO PONTO A RETA FORMADA PELOS PONTOS ADJACENTES
@@ -43,26 +51,16 @@ public class MinimizadorMapasMain {
 
 		// TRATA A MINIMIZACAO COM A DISTANCIA LIMITE
 		if (opcaoEscolhida == OPCAO_DISTANCIA_LIMITE) {
-			System.out.println("Digite a distância limite em metros:");
-			Double distancia = scanner.nextDouble();
-			redutor.reduzTrajetoriaPorDistancia(trajetoria, distancia);
+			Trajetoria trajetoriaReduzida = redutor.reduzTrajetoriaPorDistancia(trajetoria, distancia);
 
 		}
 		// TRATA A MINIMIZACAO COM A PORCENTAGEM
 		else if (opcaoEscolhida == OPCAO_PORCENTAGEM) {
-			System.out.println("Digite a porcentagem entre 0 e 100:\n");
-			Double porcentagem = null;
-			boolean porcentagemInvalida;
-			do {
-				porcentagem = scanner.nextDouble();
-				porcentagemInvalida = porcentagem > 100 || porcentagem < 0;
-				if (porcentagemInvalida) {
-					System.out.println("Porcentagem Invalida! Digite um numero ente 0 e 100, inclusive:");
-				}
-			} while (porcentagemInvalida);
-			
-			redutor.reduzTrajetoriaPorPorcentagem(trajetoria, porcentagem);
+			Trajetoria trajetoriaReduzida = redutor.reduzTrajetoriaPorPorcentagem(trajetoria, porcentagem);
 		}
+
+		// ESCREVE ARQUIVO SAIDA GPX
+		EscritorGPX escritor = new EscritorGPX();
 
 	}
 

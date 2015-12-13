@@ -15,6 +15,11 @@ public class Trajetoria {
 		pontosMarcados = new ArrayList<PontoMarcado>();
 	}
 
+	public Trajetoria(List<PontoMarcado> pontos) {
+		super();
+		pontosMarcados = pontos;
+	}
+
 	/**
 	 * ADICIONA A DISTANCIA DE UM PONTO ATE A RETA FORMADA PELOS SEUS ADJACENTES
 	 */
@@ -33,8 +38,6 @@ public class Trajetoria {
 			}
 		}
 	}
-
-	
 
 	public List<PontoMarcado> getPontosMarcados() {
 		return pontosMarcados;
