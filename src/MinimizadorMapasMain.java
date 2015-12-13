@@ -61,6 +61,7 @@ public class MinimizadorMapasMain {
 
 		// ESCREVE ARQUIVO SAIDA GPX
 		EscritorGPX escritor = new EscritorGPX();
+		
 
 	}
 

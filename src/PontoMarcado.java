@@ -1,5 +1,6 @@
 import java.util.Comparator;
 import java.util.Date;
+import java.math.BigDecimal;
 
 /**
  * Classe de domínio do ponto marcado contido na Trajetória
@@ -9,42 +10,42 @@ import java.util.Date;
  */
 
 public class PontoMarcado {
-	private Double identificador;
-	private Double longitude;
-	private Double latitude;
+	private BigDecimal identificadorElemento;
+	private BigDecimal longitude;
+	private BigDecimal latitude;
 	private Double distanciaARetaAdjacente;
 	private Date horario;
 
-	public PontoMarcado(Double identificador, Double longitude, Double latitude, Date horario) {
+	public PontoMarcado(BigDecimal identificador, BigDecimal longitude, BigDecimal latitude, Date horario) {
 		super();
-		this.identificador = identificador;
+		this.identificadorElemento = identificador;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.horario = horario;
 		this.distanciaARetaAdjacente = null;
 	}
 
-	public Double getIdentificador() {
-		return identificador;
+	public BigDecimal getIdentificador() {
+		return identificadorElemento;
 	}
 
-	public void setIdentificador(Double identificador) {
-		this.identificador = identificador;
+	public void setIdentificador(BigDecimal identificador) {
+		this.identificadorElemento = identificador;
 	}
 
-	public Double getLongitude() {
+	public BigDecimal getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(Double longitude) {
+	public void setLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
 	}
 
-	public Double getLatitude() {
+	public BigDecimal getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(Double latitude) {
+	public void setLatitude(BigDecimal latitude) {
 		this.latitude = latitude;
 	}
 

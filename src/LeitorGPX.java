@@ -1,5 +1,9 @@
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -17,35 +21,72 @@ import com.topografix.gpx.*;
  */
 public class LeitorGPX {
 
-	public static Trajetoria lerXML(String caminhoRelativo) {
+	public  Trajetoria lerXML(String caminhoRelativo) {
 
 		GpxType gpx = null;
+		Trajetoria trajetoriaPreenchida = new Trajetoria();
 		try {
 
 			JAXBContext jc = JAXBContext.newInstance("com.topografix.gpx");
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
+			@SuppressWarnings("unchecked")
 			JAXBElement<GpxType> root = (JAXBElement<GpxType>) unmarshaller
 					.unmarshal(new File("Century-2007-02-18.gpx"));
 			gpx = root.getValue();
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
-		List<TrkType> conjuntoTrajetorias = gpx.getTrk();
+		List<TrkType> conjuntoTrajetoriasGPX = gpx.getTrk();
 
-		for (TrkType trajetorias : conjuntoTrajetorias) {
-			System.out.println(trajetorias.getName());
-			for (TrksegType trajetoria : trajetorias.getTrkseg()){
-				for( WptType ponto : trajetoria.getTrkpt()){
-					System.out.println("ponto  lat = " + ponto.getLat());
-					System.out.println("lon = " + ponto.getLon());
-					System.out.println("ele =" + ponto.getEle());
-					System.out.println("time = " + ponto.getTime());
+		extrairDadosPontoXML(conjuntoTrajetoriasGPX);
+		return trajetoriaPreenchida;
+	}
+
+	/**
+	 * TAGG DO XML(TRK, TRKSEG, TRKPT)PERCORRE A LISTA DE TRK, PARA CADA TRK,
+	 * PERCORRE CADA TRKSEG, PARA CADA TRKSEG, PERCORRE CADA TRKPT PARA CADA
+	 * TRKPT, EXTRAI OS DADOS DOS PONTOS E ADICIONA CADA PONTO EM UMA TRAJETORIA
+	 * 
+	 * @param conjuntoTrajetoriasGPX
+	 * @return trajetoriaPreenchida
+	 */
+	private static Trajetoria extrairDadosPontoXML(List<TrkType> conjuntoTrajetoriasGPX) {
+
+		List<PontoMarcado> pontosMarcados = new ArrayList<PontoMarcado>();
+		for (TrkType trajetoriasGPX : conjuntoTrajetoriasGPX) {
+			System.out.println(trajetoriasGPX.getName());
+			for (TrksegType trajetoriaGPX : trajetoriasGPX.getTrkseg()) {
+				for (WptType pontoGPX : trajetoriaGPX.getTrkpt()) {
+					System.out.println("ponto  lat = " + pontoGPX.getLat());
+					System.out.println("lon = " + pontoGPX.getLon());
+					System.out.println("ele =" + pontoGPX.getEle());
+					System.out.println("time = " + pontoGPX.getTime());
+
+					Date dataPonto = conversorData(pontoGPX);
+					PontoMarcado ponto = new PontoMarcado(pontoGPX.getEle(), pontoGPX.getLon(), pontoGPX.getLat(),
+							dataPonto);
+					pontosMarcados.add(ponto);
 				}
-				
 			}
-
 		}
-		return null;
+		Trajetoria trajetoriaPreenchida = new Trajetoria();
+		trajetoriaPreenchida.setPontosMarcados(pontosMarcados);
+		return trajetoriaPreenchida;
+	}
+
+	/**
+	 * 
+	 * @param pontoGPX
+	 * @return Data XMLGregorianCalendar convertida em Date
+	 */
+	private static Date conversorData(WptType pontoGPX) {
+		Date dataPonto = null;
+		try {
+			dataPonto = new SimpleDateFormat("yyyy-mm-dd'T'hh:mm:ss'Z'").parse(pontoGPX.getTime().toString());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return dataPonto;
 	}
 
 }
