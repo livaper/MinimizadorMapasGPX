@@ -26,7 +26,7 @@ public class EscritorGPX {
 
 		for (PontoMarcado ponto : trajetoriaMinimizada.getPontosMarcados()) {
 			segments += "                     <trkpt lat=\"" + ponto.getLatitude() + "\" lon=\"" + ponto.getLongitude()
-			+ "\"><time>" + "<ele>" + ponto.getIdentificador() + "</ele>" + df.format(ponto.getData())
+			+ "\">" + "<ele>" + ponto.getIdentificador() + "</ele>" +"<time>" + df.format(ponto.getData())
 			+ "</time></trkpt>\n";
 		}
 
