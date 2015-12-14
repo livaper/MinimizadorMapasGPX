@@ -1,4 +1,5 @@
 package dominio;
+
 /**
  * Classe main que executa a minimização de mapas. A minimização consiste em
  * reduzir a quantidade de pontos presentes em uma trajetória realizada em um
@@ -22,8 +23,6 @@ public class MinimizadorMapasMain {
 
 	public static void main(String[] args) {
 
-		
-		
 		int opcaoEscolhida;
 		Double distancia = null;
 		Double porcentagem = null;
@@ -44,19 +43,9 @@ public class MinimizadorMapasMain {
 		LeitorGPX leitor = new LeitorGPX();
 		Trajetoria trajetoriaOriginal = leitor.lerXML(nomeArquivoEntrada);
 
-
 		// ADICAO DAS DISTANCIAS DO PONTO A RETA FORMADA PELOS PONTOS ADJACENTES
 		trajetoriaOriginal.adicionaDistanciaARetaAdjacenteDosPontos();
 
-		// TODO RETIRAR!!
-		for (PontoMarcado ponto : trajetoriaOriginal.getPontosMarcados()) {
-			System.out.println("TRAJETORIA ANTES MINIMIZ. distRetaAdj= " + ponto.getDistanciaARetaAdjacente());
-
-			System.out.println("ponto  lat = " + ponto.getLatitude());
-			System.out.println("lon = " + ponto.getLongitude());
-			System.out.println("ele =" + ponto.getIdentificador());
-			System.out.println("time = " + ponto.getData());
-		}
 		RedutorDePontos redutor = new RedutorDePontos();
 		Trajetoria trajetoriaReduzida = null;
 
@@ -71,11 +60,11 @@ public class MinimizadorMapasMain {
 		}
 
 		// ESCREVE ARQUIVO SAIDA GPX
-		
+
 		trajetoriaReduzida.setNome(trajetoriaOriginal.getNome());
 		EscritorGPX escritor = new EscritorGPX();
 		escritor.escreverGPX(trajetoriaReduzida, nomeArquivoSaida);
-		
+
 		System.out.println("Tamanho trajetoria entrada = " + trajetoriaOriginal.getPontosMarcados().size());
 		System.out.println("Tamanho trajetoria saida = " + trajetoriaReduzida.getPontosMarcados().size());
 	}

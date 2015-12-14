@@ -90,8 +90,8 @@ public class RedutorDePontos {
 		pontosReduzidos.add(pontoFinal);
 		trajetoriaOriginal.getPontosMarcados().add(0, pontoOrigem);
 		trajetoriaOriginal.getPontosMarcados().add(pontoFinal);
-		
-		//RETOMA A ORDEM ORIGINAL DOS PONTOS
+
+		// RETOMA A ORDEM ORIGINAL DOS PONTOS
 		Collections.sort(pontosReduzidos, PontoMarcado.getComparatorDataCrescente());
 
 		return new Trajetoria(pontosReduzidos);

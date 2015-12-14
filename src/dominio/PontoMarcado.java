@@ -1,4 +1,5 @@
 package dominio;
+
 import java.util.Comparator;
 import java.util.Date;
 
@@ -18,10 +19,14 @@ public class PontoMarcado {
 
 	/**
 	 * 
-	 * @param identificador Double
-	 * @param longitude Double
-	 * @param latitude Double
-	 * @param horario Date
+	 * @param identificador
+	 *            Double
+	 * @param longitude
+	 *            Double
+	 * @param latitude
+	 *            Double
+	 * @param horario
+	 *            Date
 	 */
 	public PontoMarcado(Double identificador, Double longitude, Double latitude, Date horario) {
 		super();

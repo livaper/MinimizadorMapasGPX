@@ -1,4 +1,5 @@
 package dominio;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,7 +7,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class EscritorGPX {
-	private static final String TAG = EscritorGPX.class.getName();
 
 	public static void escreverGPX(Trajetoria trajetoriaMinimizada, String nomeArquivo) {
 
@@ -25,12 +25,13 @@ public class EscritorGPX {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
 		for (PontoMarcado ponto : trajetoriaMinimizada.getPontosMarcados()) {
-			segments += "                     <trkpt lat=\"" + ponto.getLatitude() + "\" lon=\"" + ponto.getLongitude() + "\"><time>"
-					+ "<ele>" + ponto.getIdentificador() + "</ele>" + df.format(ponto.getData()) + "</time></trkpt>\n";
+			segments += "                     <trkpt lat=\"" + ponto.getLatitude() + "\" lon=\"" + ponto.getLongitude()
+			+ "\"><time>" + "<ele>" + ponto.getIdentificador() + "</ele>" + df.format(ponto.getData())
+			+ "</time></trkpt>\n";
 		}
 
 		String footer = "</trkseg></trk></gpx>";
-		
+
 		File arquivo = new File(nomeArquivo);
 		FileWriter escritor;
 		try {

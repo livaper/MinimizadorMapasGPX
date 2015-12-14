@@ -22,7 +22,7 @@ import com.topografix.gpx.*;
  */
 public class LeitorGPX {
 
-	public  Trajetoria lerXML(String caminhoRelativo) {
+	public Trajetoria lerXML(String caminhoRelativo) {
 
 		GpxType gpx = null;
 		Trajetoria trajetoriaPreenchida = new Trajetoria();
@@ -31,8 +31,7 @@ public class LeitorGPX {
 			JAXBContext jc = JAXBContext.newInstance("com.topografix.gpx");
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 			@SuppressWarnings("unchecked")
-			JAXBElement<GpxType> root = (JAXBElement<GpxType>) unmarshaller
-					.unmarshal(new File("Century-2007-02-18.gpx"));
+			JAXBElement<GpxType> root = (JAXBElement<GpxType>) unmarshaller.unmarshal(new File(caminhoRelativo));
 			gpx = root.getValue();
 		} catch (JAXBException e) {
 			e.printStackTrace();
@@ -54,20 +53,20 @@ public class LeitorGPX {
 	private static Trajetoria extrairDadosPontoXML(List<TrkType> conjuntoTrajetoriasGPX) {
 		Trajetoria trajetoriaPreenchida = new Trajetoria();
 		List<PontoMarcado> pontosMarcados = new ArrayList<PontoMarcado>();
-		
+
 		for (TrkType trajetoriasGPX : conjuntoTrajetoriasGPX) {
 			trajetoriaPreenchida.setNome(trajetoriasGPX.getName());
 			System.out.println(trajetoriasGPX.getName());
 			for (TrksegType trajetoriaGPX : trajetoriasGPX.getTrkseg()) {
 				for (WptType pontoGPX : trajetoriaGPX.getTrkpt()) {
 					Date dataPonto = conversorData(pontoGPX);
-					PontoMarcado ponto = new PontoMarcado(pontoGPX.getEle().doubleValue(), pontoGPX.getLon().doubleValue(), pontoGPX.getLat().doubleValue(),
-							dataPonto);
+					PontoMarcado ponto = new PontoMarcado(pontoGPX.getEle().doubleValue(),
+							pontoGPX.getLon().doubleValue(), pontoGPX.getLat().doubleValue(), dataPonto);
 					pontosMarcados.add(ponto);
 				}
 			}
 		}
-		
+
 		trajetoriaPreenchida.setPontosMarcados(pontosMarcados);
 		return trajetoriaPreenchida;
 	}

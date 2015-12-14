@@ -44,7 +44,6 @@ public class RedutorDePontosTest {
 			data9 = new SimpleDateFormat("yyyy-mm-dd'T'hh:mm:ss'Z'").parse("2007-01-18T03:34:40Z");
 			data10 = new SimpleDateFormat("yyyy-mm-dd'T'hh:mm:ss'Z'").parse("2007-01-18T03:34:50Z");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
