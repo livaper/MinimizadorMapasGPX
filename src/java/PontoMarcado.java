@@ -1,6 +1,6 @@
+package java;
 import java.util.Comparator;
 import java.util.Date;
-import java.math.BigDecimal;
 
 /**
  * Classe de domínio do ponto marcado contido na Trajetória
@@ -10,51 +10,51 @@ import java.math.BigDecimal;
  */
 
 public class PontoMarcado {
-	private BigDecimal identificadorElemento;
-	private BigDecimal longitude;
-	private BigDecimal latitude;
+	private Double identificadorElemento;
+	private Double longitude;
+	private Double latitude;
 	private Double distanciaARetaAdjacente;
-	private Date horario;
+	private Date data;
 
-	public PontoMarcado(BigDecimal identificador, BigDecimal longitude, BigDecimal latitude, Date horario) {
+	public PontoMarcado(Double identificador, Double longitude, Double latitude, Date horario) {
 		super();
 		this.identificadorElemento = identificador;
 		this.longitude = longitude;
 		this.latitude = latitude;
-		this.horario = horario;
+		this.data = horario;
 		this.distanciaARetaAdjacente = null;
 	}
 
-	public BigDecimal getIdentificador() {
+	public Double getIdentificador() {
 		return identificadorElemento;
 	}
 
-	public void setIdentificador(BigDecimal identificador) {
+	public void setIdentificador(Double identificador) {
 		this.identificadorElemento = identificador;
 	}
 
-	public BigDecimal getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(BigDecimal longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 
-	public BigDecimal getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(BigDecimal latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
-	public Date getHorario() {
-		return horario;
+	public Date getData() {
+		return data;
 	}
 
-	public void setHorario(Date horario) {
-		this.horario = horario;
+	public void setData(Date horario) {
+		this.data = horario;
 	}
 
 	public Double getDistanciaARetaAdjacente() {
@@ -69,7 +69,7 @@ public class PontoMarcado {
 		return new Comparator<PontoMarcado>() {
 			@Override
 			public int compare(PontoMarcado ponto1, PontoMarcado ponto2) {
-				return ponto1.getHorario().compareTo(ponto2.getHorario());
+				return ponto1.getData().compareTo(ponto2.getData());
 			}
 		};
 	}

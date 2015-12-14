@@ -1,3 +1,4 @@
+package java;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  */
 public class Trajetoria {
 	List<PontoMarcado> pontosMarcados;
+	String nome;
 
 	public Trajetoria() {
 		super();
@@ -45,6 +47,14 @@ public class Trajetoria {
 
 	public void setPontosMarcados(List<PontoMarcado> trajetoria) {
 		this.pontosMarcados = trajetoria;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

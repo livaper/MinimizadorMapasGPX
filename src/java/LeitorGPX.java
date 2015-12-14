@@ -1,3 +1,4 @@
+package java;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,7 +39,7 @@ public class LeitorGPX {
 		}
 		List<TrkType> conjuntoTrajetoriasGPX = gpx.getTrk();
 
-		extrairDadosPontoXML(conjuntoTrajetoriasGPX);
+		trajetoriaPreenchida = extrairDadosPontoXML(conjuntoTrajetoriasGPX);
 		return trajetoriaPreenchida;
 	}
 
@@ -51,25 +52,27 @@ public class LeitorGPX {
 	 * @return trajetoriaPreenchida
 	 */
 	private static Trajetoria extrairDadosPontoXML(List<TrkType> conjuntoTrajetoriasGPX) {
-
+		Trajetoria trajetoriaPreenchida = new Trajetoria();
 		List<PontoMarcado> pontosMarcados = new ArrayList<PontoMarcado>();
+		
 		for (TrkType trajetoriasGPX : conjuntoTrajetoriasGPX) {
+			trajetoriaPreenchida.setNome(trajetoriasGPX.getName());
 			System.out.println(trajetoriasGPX.getName());
 			for (TrksegType trajetoriaGPX : trajetoriasGPX.getTrkseg()) {
 				for (WptType pontoGPX : trajetoriaGPX.getTrkpt()) {
-					System.out.println("ponto  lat = " + pontoGPX.getLat());
+					System.out.println("pt  lat = " + pontoGPX.getLat());
 					System.out.println("lon = " + pontoGPX.getLon());
 					System.out.println("ele =" + pontoGPX.getEle());
 					System.out.println("time = " + pontoGPX.getTime());
 
 					Date dataPonto = conversorData(pontoGPX);
-					PontoMarcado ponto = new PontoMarcado(pontoGPX.getEle(), pontoGPX.getLon(), pontoGPX.getLat(),
+					PontoMarcado ponto = new PontoMarcado(pontoGPX.getEle().doubleValue(), pontoGPX.getLon().doubleValue(), pontoGPX.getLat().doubleValue(),
 							dataPonto);
 					pontosMarcados.add(ponto);
 				}
 			}
 		}
-		Trajetoria trajetoriaPreenchida = new Trajetoria();
+		
 		trajetoriaPreenchida.setPontosMarcados(pontosMarcados);
 		return trajetoriaPreenchida;
 	}
