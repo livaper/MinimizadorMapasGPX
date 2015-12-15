@@ -11,7 +11,7 @@ public class EscritorGPX {
 	public static void escreverGPX(Trajetoria trajetoriaMinimizada, String nomeArquivo) {
 
 		String header = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n"
-				+ "   <gpx creator=\"LoadMyTracks/045 \"http://www.cluetrust.com/LoadMyTracks.html\" \n"
+				+ "   <gpx creator=\"LoadMyTracks/045 http://www.cluetrust.com/LoadMyTracks.html\" \n"
 				+ "   version=\"1.1\" xmlns=\"http://www.topografix.com/GPX/1/1\" \n"
 				+ "   xmlns:geocache=\"http://www.groundspeak.com/cache/1/0\" \n"
 				+ "   xmlns:gpxdata=\"http://www.cluetrust.com/XML/GPXDATA/1/0\" \n"

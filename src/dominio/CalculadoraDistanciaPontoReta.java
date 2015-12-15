@@ -37,11 +37,12 @@ public class CalculadoraDistanciaPontoReta {
 		return distancia;
 	}
 
+	//TODO Verificar!
 	private Double calculaModuloLatitude(PontoMarcado pontoAnterior) {
-		return (pontoAnterior.getLatitude() < 0 ? pontoAnterior.getLatitude() * (-1) : pontoAnterior.getLatitude());
+		return (pontoAnterior.getLatitude() < 0 ? pontoAnterior.getLatitude() * (1) : pontoAnterior.getLatitude());
 	}
 
 	private Double calculaModuloLongitude(PontoMarcado pontoAnterior) {
-		return (pontoAnterior.getLongitude() < 0 ? pontoAnterior.getLongitude() * (-1) : pontoAnterior.getLongitude());
+		return (pontoAnterior.getLongitude() < 0 ? pontoAnterior.getLongitude() * (1) : pontoAnterior.getLongitude());
 	}
 }
