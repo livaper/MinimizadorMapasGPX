@@ -1,10 +1,13 @@
-package dominio;
+package escritaXML;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
+import dominio.PontoMarcado;
+import dominio.Trajetoria;
 
 public class EscritorGPX {
 
@@ -26,8 +29,8 @@ public class EscritorGPX {
 
 		for (PontoMarcado ponto : trajetoriaMinimizada.getPontosMarcados()) {
 			segments += "                     <trkpt lat=\"" + ponto.getLatitude() + "\" lon=\"" + ponto.getLongitude()
-			+ "\">" + "<ele>" + ponto.getIdentificador() + "</ele>" +"<time>" + df.format(ponto.getData())
-			+ "</time></trkpt>\n";
+					+ "\">" + "<ele>" + ponto.getIdentificador() + "</ele>" + "<time>" + df.format(ponto.getData())
+					+ "</time></trkpt>\n";
 		}
 
 		String footer = "</trkseg></trk></gpx>";

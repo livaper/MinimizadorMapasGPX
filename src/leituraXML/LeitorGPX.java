@@ -1,8 +1,13 @@
-package dominio;
+package leituraXML;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +16,10 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import com.topografix.gpx.*;
+
+import dominio.PontoMarcado;
+import dominio.Trajetoria;
+import mapeamentoXMLObjeto.*;
 
 /**
  * Classe para a leitura dos dados no arquivo GPX contendo os dados da
@@ -24,11 +32,13 @@ public class LeitorGPX {
 
 	public Trajetoria lerXML(String caminhoRelativo) {
 
+		adequaTagGPXParaLeitura(caminhoRelativo);
+
 		GpxType gpx = null;
 		Trajetoria trajetoriaPreenchida = new Trajetoria();
 		try {
 
-			JAXBContext jc = JAXBContext.newInstance("com.topografix.gpx");
+			JAXBContext jc = JAXBContext.newInstance("mapeamentoXMLObjeto");
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 			@SuppressWarnings("unchecked")
 			JAXBElement<GpxType> root = (JAXBElement<GpxType>) unmarshaller.unmarshal(new File(caminhoRelativo));
@@ -43,7 +53,7 @@ public class LeitorGPX {
 	}
 
 	/**
-	 * TAGG DO XML(TRK, TRKSEG, TRKPT)PERCORRE A LISTA DE TRK, PARA CADA TRK,
+	 * TAG DO XML(TRK, TRKSEG, TRKPT)PERCORRE A LISTA DE TRK, PARA CADA TRK,
 	 * PERCORRE CADA TRKSEG, PARA CADA TRKSEG, PERCORRE CADA TRKPT PARA CADA
 	 * TRKPT, EXTRAI OS DADOS DOS PONTOS E ADICIONA CADA PONTO EM UMA TRAJETORIA
 	 * 
@@ -84,6 +94,35 @@ public class LeitorGPX {
 			e.printStackTrace();
 		}
 		return dataPonto;
+	}
+
+	/**
+	 * ADEQUA TAG <gpx> PARA REALIZAR A LEITURA CORRETAMENTE ATRAVES DO
+	 * MAPEAMENTO GPX-OBJETO
+	 * 
+	 * @param caminhoRelativo
+	 */
+	private void adequaTagGPXParaLeitura(String caminhoRelativo) {
+		String arquivoTemporario = "ARQUIVO-TMP";
+		try {
+			BufferedReader leitor = new BufferedReader(new FileReader(caminhoRelativo));
+			BufferedWriter escritor = new BufferedWriter(new FileWriter(arquivoTemporario));
+
+			String linha = " ";
+
+			while ((linha = leitor.readLine()) != null) {
+				if (linha.contains("<gpx>")) {
+					linha = linha.replace("<gpx>", "<gpx xmlns=\"http://www.topografix.com/GPX/1/1\">");
+				}
+				escritor.write(linha + "\n");
+			}
+			escritor.close();
+			leitor.close();
+			new File(caminhoRelativo).delete();
+			new File(arquivoTemporario).renameTo(new File(caminhoRelativo));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 }

@@ -3,16 +3,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/Users/liviapereira/Documents/EclipseJavaWorkspace/ExternalJars/eclemma-2.3.2/artifacts.jar"/>
-	<classpathentry kind="lib" path="/Users/liviapereira/Documents/EclipseJavaWorkspace/ExternalJars/eclemma-2.3.2/content.jar"/>
-	<classpathentry kind="lib" path="/Users/liviapereira/Documents/EclipseJavaWorkspace/ExternalJars/eclemma-2.3.2/features/com.mountainminds.eclemma.feature_2.3.2.201409141915.jar"/>
-	<classpathentry kind="lib" path="/Users/liviapereira/Documents/EclipseJavaWorkspace/ExternalJars/eclemma-2.3.2/plugins/com.mountainminds.eclemma.asm_2.3.2.201409141915.jar"/>
-	<classpathentry kind="lib" path="/Users/liviapereira/Documents/EclipseJavaWorkspace/ExternalJars/eclemma-2.3.2/plugins/com.mountainminds.eclemma.core_2.3.2.201409141915.jar"/>
-	<classpathentry kind="lib" path="/Users/liviapereira/Documents/EclipseJavaWorkspace/ExternalJars/eclemma-2.3.2/plugins/com.mountainminds.eclemma.debug.ui.compatibility_2.3.2.201409141915.jar"/>
-	<classpathentry kind="lib" path="/Users/liviapereira/Documents/EclipseJavaWorkspace/ExternalJars/eclemma-2.3.2/plugins/com.mountainminds.eclemma.doc_2.3.2.201409141915.jar"/>
-	<classpathentry kind="lib" path="/Users/liviapereira/Documents/EclipseJavaWorkspace/ExternalJars/eclemma-2.3.2/plugins/com.mountainminds.eclemma.ui_2.3.2.201409141915.jar"/>
-	<classpathentry kind="lib" path="/Users/liviapereira/Documents/EclipseJavaWorkspace/ExternalJars/eclemma-2.3.2/plugins/org.jacoco.agent_0.7.2.201409121644.jar"/>
-	<classpathentry kind="lib" path="/Users/liviapereira/Documents/EclipseJavaWorkspace/ExternalJars/eclemma-2.3.2/plugins/org.jacoco.core_0.7.2.201409121644.jar"/>
-	<classpathentry kind="lib" path="/Users/liviapereira/Documents/EclipseJavaWorkspace/ExternalJars/eclemma-2.3.2/plugins/org.jacoco.report_0.7.2.201409121644.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

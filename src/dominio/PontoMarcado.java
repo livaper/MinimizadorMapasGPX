@@ -14,7 +14,7 @@ public class PontoMarcado {
 	private Double identificadorElemento;
 	private Double longitude;
 	private Double latitude;
-	private Double distanciaARetaAdjacente;
+	private Double distanciaGeograficaAoArcoFormadoPelosPontosAdjacentes;
 	private Date data;
 
 	/**
@@ -34,7 +34,7 @@ public class PontoMarcado {
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.data = horario;
-		this.distanciaARetaAdjacente = null;
+		this.distanciaGeograficaAoArcoFormadoPelosPontosAdjacentes = null;
 	}
 
 	public Double getIdentificador() {
@@ -69,12 +69,12 @@ public class PontoMarcado {
 		this.data = horario;
 	}
 
-	public Double getDistanciaARetaAdjacente() {
-		return distanciaARetaAdjacente;
+	public Double getDistanciaGeograficaAoArcoFormadoPelosPontosAdjacentes() {
+		return distanciaGeograficaAoArcoFormadoPelosPontosAdjacentes;
 	}
 
-	public void setDistanciaARetaAdjacente(Double distanciaARetaAdjacente) {
-		this.distanciaARetaAdjacente = distanciaARetaAdjacente;
+	public void setDistanciaGeograficaAoArcoFormadoPelosPontosAdjacentes(Double distanciaARetaAdjacente) {
+		this.distanciaGeograficaAoArcoFormadoPelosPontosAdjacentes = distanciaARetaAdjacente;
 	}
 
 	public static Comparator<PontoMarcado> getComparatorDataCrescente() {
@@ -90,7 +90,8 @@ public class PontoMarcado {
 		return new Comparator<PontoMarcado>() {
 			@Override
 			public int compare(PontoMarcado ponto1, PontoMarcado ponto2) {
-				return ponto1.getDistanciaARetaAdjacente().compareTo(ponto2.getDistanciaARetaAdjacente());
+				return ponto1.getDistanciaGeograficaAoArcoFormadoPelosPontosAdjacentes()
+						.compareTo(ponto2.getDistanciaGeograficaAoArcoFormadoPelosPontosAdjacentes());
 			}
 		};
 	}

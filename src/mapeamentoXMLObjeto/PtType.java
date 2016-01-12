@@ -6,7 +6,7 @@
 //
 
 
-package com.topografix.gpx;
+package mapeamentoXMLObjeto;
 
 import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;

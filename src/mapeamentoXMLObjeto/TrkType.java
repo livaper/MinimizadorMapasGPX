@@ -6,7 +6,7 @@
 //
 
 
-package com.topografix.gpx;
+package mapeamentoXMLObjeto;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

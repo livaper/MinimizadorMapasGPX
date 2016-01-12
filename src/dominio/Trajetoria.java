@@ -1,6 +1,9 @@
 package dominio;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import redutorPontos.CalculadoraDistanciaGeografica;
 
 /**
  * Classe de domínio para a trajetória realizada no arquivo GPX
@@ -23,10 +26,11 @@ public class Trajetoria {
 	}
 
 	/**
-	 * ADICIONA A DISTANCIA DE UM PONTO ATE A RETA FORMADA PELOS SEUS ADJACENTES
+	 * ADICIONA A DISTANCIA GEOGRAFICA DE UM PONTO DA TRAJETORIA ATE O ARCO
+	 * FORMADO PELOS SEUS ADJACENTES
 	 */
-	public void adicionaDistanciaARetaAdjacenteDosPontos() {
-		CalculadoraDistanciaPontoReta calculadora = new CalculadoraDistanciaPontoReta();
+	public void adicionaDistanciaGeograficaDosPontos() {
+		CalculadoraDistanciaGeografica calculadora = new CalculadoraDistanciaGeografica();
 
 		for (PontoMarcado ponto : pontosMarcados) {
 			boolean primeiroPontoTrajetoria = pontosMarcados.indexOf(ponto) == 0;
@@ -35,8 +39,9 @@ public class Trajetoria {
 			if (!primeiroPontoTrajetoria && !ultimoPontoTrajetoria) {
 				PontoMarcado pontoSeguinte = pontosMarcados.get(pontosMarcados.indexOf(ponto) + 1);
 				PontoMarcado pontoAnterior = pontosMarcados.get(pontosMarcados.indexOf(ponto) - 1);
-				Double distancia = calculadora.calculaDistanciaDeUmPontoAReta(ponto, pontoAnterior, pontoSeguinte);
-				ponto.setDistanciaARetaAdjacente(distancia);
+				Double distancia = calculadora.calculaDistanciaDeUmPontoAoArcoAdjacente(ponto, pontoAnterior,
+						pontoSeguinte);
+				ponto.setDistanciaGeograficaAoArcoFormadoPelosPontosAdjacentes(distancia);
 			}
 		}
 	}

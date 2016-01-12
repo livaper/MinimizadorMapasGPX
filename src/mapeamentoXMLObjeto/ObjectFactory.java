@@ -6,7 +6,7 @@
 //
 
 
-package com.topografix.gpx;
+package mapeamentoXMLObjeto;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;

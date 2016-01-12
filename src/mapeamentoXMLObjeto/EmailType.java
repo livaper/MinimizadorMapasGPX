@@ -6,7 +6,7 @@
 //
 
 
-package com.topografix.gpx;
+package mapeamentoXMLObjeto;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

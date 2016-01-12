@@ -1,4 +1,9 @@
-package dominio;
+package main;
+
+import dominio.Trajetoria;
+import escritaXML.EscritorGPX;
+import leituraXML.LeitorGPX;
+import redutorPontos.RedutorDePontos;
 
 /**
  * Classe main que executa a minimização de mapas. A minimização consiste em
@@ -7,11 +12,18 @@ package dominio;
  * na minimização. A redução poderá ser feita de duas formas. A primeira forma
  * consistirá no recebimento de um valor em metros via teclado. Desta forma a
  * minimização será feita descartando os pontos que estiverem em uma distância
- * da reta formada pelos pontos adjacentes menor ou igual àquela espeficicada
- * pelo usuário. A segunda forma consistirá no recebimento de um valor em
- * porcentagem via teclado (valor entre 0 e 100). Desta forma a minimização será
- * feita descartando o percentual de pontos da trajetória que estiverem mais
- * próximos da reta formada pelos pontos adjacentes.
+ * do arco formado pelos pontos adjacentes menor ou igual a uma distância limite
+ * espeficicada pelo usuário. A segunda forma consistirá no recebimento de um
+ * valor em porcentagem via teclado (valor entre 0 e 100). Desta forma a
+ * minimização será feita mantendo na trajetória apenas o percentual de pontos
+ * informado, ou seja, descartando "100 menos o valor entrado no teclado %" de
+ * pontos que estiverem mais próximos do arco formada pelos pontos adjacentes.
+ * 
+ * A trajetória será lida a partir de um arquivo de formato GPX e a trajetória
+ * reduzida será escrita em um novo arquivo de mesmo formato. Tanto o arquivo de
+ * entrada quanto o de saída podem ser abertos no aplicativo Google Earth, para
+ * a visualização das respectivas trajetórias no mapa Mundi.
+ * 
  * 
  * @author liviapereira
  *
@@ -44,7 +56,7 @@ public class MinimizadorMapasMain {
 		Trajetoria trajetoriaOriginal = leitor.lerXML(nomeArquivoEntrada);
 
 		// ADICAO DAS DISTANCIAS DO PONTO A RETA FORMADA PELOS PONTOS ADJACENTES
-		trajetoriaOriginal.adicionaDistanciaARetaAdjacenteDosPontos();
+		trajetoriaOriginal.adicionaDistanciaGeograficaDosPontos();
 
 		RedutorDePontos redutor = new RedutorDePontos();
 		Trajetoria trajetoriaReduzida = null;

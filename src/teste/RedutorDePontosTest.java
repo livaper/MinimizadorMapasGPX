@@ -12,8 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dominio.PontoMarcado;
-import dominio.RedutorDePontos;
 import dominio.Trajetoria;
+import redutorPontos.RedutorDePontos;
 
 public class RedutorDePontosTest {
 
@@ -58,14 +58,14 @@ public class RedutorDePontosTest {
 		PontoMarcado ponto9 = new PontoMarcado(9.0, 20.000000, 20.000000, data9);
 		PontoMarcado ponto10 = new PontoMarcado(10.0, 20.000000, 20.000000, data10);
 
-		ponto2.setDistanciaARetaAdjacente(2.0);
-		ponto3.setDistanciaARetaAdjacente(3.0);
-		ponto4.setDistanciaARetaAdjacente(4.0);
-		ponto5.setDistanciaARetaAdjacente(5.0);
-		ponto6.setDistanciaARetaAdjacente(6.0);
-		ponto7.setDistanciaARetaAdjacente(7.0);
-		ponto8.setDistanciaARetaAdjacente(8.0);
-		ponto9.setDistanciaARetaAdjacente(9.0);
+		ponto2.setDistanciaGeograficaAoArcoFormadoPelosPontosAdjacentes(2.0);
+		ponto3.setDistanciaGeograficaAoArcoFormadoPelosPontosAdjacentes(3.0);
+		ponto4.setDistanciaGeograficaAoArcoFormadoPelosPontosAdjacentes(4.0);
+		ponto5.setDistanciaGeograficaAoArcoFormadoPelosPontosAdjacentes(5.0);
+		ponto6.setDistanciaGeograficaAoArcoFormadoPelosPontosAdjacentes(6.0);
+		ponto7.setDistanciaGeograficaAoArcoFormadoPelosPontosAdjacentes(7.0);
+		ponto8.setDistanciaGeograficaAoArcoFormadoPelosPontosAdjacentes(8.0);
+		ponto9.setDistanciaGeograficaAoArcoFormadoPelosPontosAdjacentes(9.0);
 
 		List<PontoMarcado> pontos = new ArrayList<PontoMarcado>();
 		pontos.add(ponto1);
@@ -88,30 +88,32 @@ public class RedutorDePontosTest {
 	 * 
 	 */
 	@Test
+	public void testTrajetoriaPorPorcentagem() {
+
+		RedutorDePontos redutor = new RedutorDePontos();
+		int numeroPontosTrajetoriaReduzida = (int) (trajetoriaInicial.getPontosMarcados().size() * 0.7);
+		Trajetoria trajetoriaReduzida = redutor.reduzTrajetoriaPorPorcentagem(trajetoriaInicial, 70.0);
+		assertEquals(numeroPontosTrajetoriaReduzida, trajetoriaReduzida.getPontosMarcados().size());
+	}
+	
+	/**
+	 * Verifica quantidade de Pontos reduzidos pelo parametro porcentagem
+	 * 
+	 */
+	@Test
 	public void testTrajetoriaPorDistancia() {
 
 		RedutorDePontos redutor = new RedutorDePontos();
-		int numeroPontosTrajetoriaReduzida = 6;
+		int numeroPontosTrajetoriaReduzida = 8;
 		Trajetoria trajetoriaReduzida = redutor.reduzTrajetoriaPorDistancia(trajetoriaInicial, 5.0);
 		System.out.println("pontos");
 		for (PontoMarcado ponto : trajetoriaReduzida.getPontosMarcados()) {
-			System.out.println(ponto.getDistanciaARetaAdjacente());
+			System.out.println(ponto.getDistanciaGeograficaAoArcoFormadoPelosPontosAdjacentes());
 		}
 
 		assertEquals(numeroPontosTrajetoriaReduzida, trajetoriaReduzida.getPontosMarcados().size());
 
 	}
 
-	/**
-	 * Verifica quantidade de Pontos reduzidos pelo parametro porcentagem
-	 * 
-	 */
-	public void testTrajetoriaPorPorcentagem() {
-
-		RedutorDePontos redutor = new RedutorDePontos();
-		int numeroPontosTrajetoriaReduzida = (int) (trajetoriaInicial.getPontosMarcados().size() * 0.7);
-		Trajetoria trajetoriaReduzida = redutor.reduzTrajetoriaPorPorcentagem(trajetoriaInicial, 30.0);
-		assertEquals(numeroPontosTrajetoriaReduzida, trajetoriaReduzida.getPontosMarcados().size());
-	}
 
 }
